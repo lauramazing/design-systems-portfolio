@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laura Marshall — Portfolio</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,700;1,400&family=IBM+Plex+Serif:ital,wght@0,300;0,400;0,700;1,400&display=swap">
+<style>
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --serif: "IBM Plex Serif", "Georgia", "Times New Roman", serif;
+  --sans: "IBM Plex Sans", -apple-system, "Segoe UI", system-ui, sans-serif;
+  --ink: #0f0f0f;
+  --ink-mid: #2e2e2e;
+  --muted: #767676;
+  --rule: #e2e2e2;
+  --bg: #fafaf8;
+  --bar-h: 40px;
+  --max: 1240px;
+  --accent-colour: #007d79;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--ink);
+  background: var(--bg);
+  overflow-x: hidden;
+  padding-top: var(--bar-h);
+}
+
+.top-bar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--bar-h);
+  background: rgba(250,250,248,0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule);
+  z-index: 100;
+}
+
+.top-bar-inner {
+  max-width: 1240px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.top-bar-left {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.top-bar-right {
+  font-size: 16px;
+  color: var(--muted);
+  text-align: right;
+}
+
+.top-bar-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.top-bar-sep {
+  font-size: 16px;
+  color: var(--rule);
+}
+
+.top-bar-role {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+
+
+.hero {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: calc(var(--bar-h) + 26px) 48px 64px;
+  display: grid;
+  grid-template-columns: repeat(16, minmax(0, 1fr));
+}
+
+.hero-title {
+  grid-column: 1 / span 10;
+  font-family: var(--serif);
+  font-size: clamp(36px, 5.5vw, 72px);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.hero-title .line-1 { display: block; margin-bottom: 0.18em; }
+.hero-title .line-2a { display: block; font-style: italic; color: var(--accent-colour); margin-bottom: 0.1em; }
+.hero-title .line-2b { display: block; font-style: italic; color: var(--accent-colour); }
+
+.hero-stats {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 161px 180px 175px 161px 175px;
+  column-gap: 24px;
+  margin-top: 46px;
+}
+
+.hero-stat {
+  min-width: 0;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  display: block;
+}
+
+.hero-stats:has(.hero-stat:hover) .hero-stat:not(:hover) {
+  opacity: 0.15;
+}
+
+.hero-stat:hover {
+  transform: scale(1.01);
+}
+
+.hero-stat:hover .hero-stat-text {
+  font-weight: 500;
+  color: var(--accent-colour);
+}
+
+.hero-stat-icon,
+.hero-stat-number {
+  width: 32px;
+  height: 32px;
+  color: var(--accent-colour);
+  flex-shrink: 0;
+  margin-bottom: 8px;
+}
+
+.hero-stat-number {
+  font-family: var(--serif);
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 40px;
+  display: block;
+  letter-spacing: 0;
+  color: var(--accent-colour);
+}
+
+.hero-stat-icon {
+  display: block;
+}
+
+.hero-stat-text {
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 22px;
+  color: var(--ink);
+  letter-spacing: 0;
+}
+
+.hero-scroll {
+  grid-column: 1 / span 4;
+  margin-top: 48px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  color: var(--muted);
+}
+.hero-scroll-line { width: 26px; height: 1px; background: var(--muted); }
+
+.section {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 40px 48px;
+  border-top: 1px solid var(--rule);
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+}
+
+.section-grid {
+  display: grid;
+  grid-template-columns: repeat(16, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.body-col {
+  grid-column: 1 / span 10;
+}
+
+.body-col p {
+  font-size: 16px;
+  line-height: 1.85;
+  color: var(--ink-mid);
+  margin-bottom: 22px;
+  text-align: left;
+}
+.body-col p:last-child { margin-bottom: 0; }
+
+.pull-quote {
+  grid-column: 12 / span 5;
+  align-self: start;
+  font-family: var(--serif);
+  font-size: clamp(28px, 3.4vw, 42px);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--accent-colour);
+  text-align: left;
+  padding: 0;
+  margin: 0;
+  pointer-events: none;
+  user-select: text;
+}
+
+.section-label {
+  font-size: 16px;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 24px;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.project-card {
+  background: var(--bg);
+  padding: 20px 26px;
+  height: 116px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 16px;
+  position: relative;
+  transition: background 0.25s ease, height 0.35s cubic-bezier(0.16,1,0.3,1);
+  cursor: pointer;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.project-card:hover,
+.project-card:focus-visible { background: #f0efec; outline: none; height: 148px; }
+.project-card:hover .project-name,
+.project-card:focus-visible .project-name { color: #007d79; }
+
+.project-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.project-icon {
+  width: 24px;
+  height: 24px;
+  fill: var(--ink);
+  flex-shrink: 0;
+  transition: fill 0.2s ease;
+}
+.project-card:hover .project-icon,
+.project-card:focus-visible .project-icon { fill: #007d79; }
+
+.project-arrow {
+  font-size: 16px;
+  color: #007d79;
+  opacity: 0;
+  transform: translate(-6px, 6px);
+  transition: opacity 0.2s ease, transform 0.3s cubic-bezier(0.16,1,0.3,1);
+}
+
+.project-card:hover .project-arrow,
+.project-card:focus-visible .project-arrow { opacity: 1; transform: none; }
+.project-card-bottom { position: relative; }
+
+.project-name {
+  font-family: var(--serif);
+  font-size: clamp(18px, 2vw, 26px);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--ink);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.project-desc {
+  font-size: 16px;
+  color: var(--muted);
+  line-height: 1.6;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  margin-top: 0;
+  padding-bottom: 0;
+  transition: max-height 0.4s cubic-bezier(0.16,1,0.3,1), opacity 0.3s ease 0.06s, margin-top 0.3s ease, padding-bottom 0.3s ease;
+}
+
+.project-card:hover .project-desc,
+.project-card:focus-visible .project-desc { max-height: 80px; opacity: 1; margin-top: 8px; }
+
+footer {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 20px 48px 40px;
+  border-top: 1px solid var(--rule);
+  display: grid;
+  grid-template-columns: repeat(16, minmax(0, 1fr));
+  gap: 24px;
+  font-size: 16px;
+  color: var(--muted);
+}
+
+footer span:first-child { grid-column: 1 / span 8; }
+footer span:last-child { grid-column: 9 / span 8; text-align: right; }
+
+@media (max-width: 680px) {
+  .top-bar-inner, .hero, .section, footer { padding-left: 24px; padding-right: 24px; }
+  .project-card { height: auto; min-height: 100px; }
+  .hero { min-height: 60vh; padding-bottom: 48px; }
+  .section { padding-top: 28px; padding-bottom: 28px; }
+  .hero, .section-grid, footer { grid-template-columns: 1fr; }
+  .hero-eyebrow, .hero-title, .hero-sub, .hero-scroll, .body-col, .pull-quote, footer span:first-child, footer span:last-child { grid-column: auto; }
+  footer span:last-child { text-align: left; }
+}
+
+
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="top-bar-inner">
+    <div class="top-bar-left">
+      <span class="top-bar-name">Laura Marshall</span>
+      <span class="top-bar-sep">/</span>
+      <span class="top-bar-role">Exemplar Designer</span>
+    </div>
+    <div class="top-bar-right">Portfolio · Carbon Next Tiger Team</div>
+  </div>
+</div>
+
+<section class="hero">
+  <h1 class="hero-title">
+    <span class="line-1">I didn't just use Carbon. I shaped it.</span>
+    <span class="line-2a">Now I want to define</span>
+    <span class="line-2b">what it becomes.</span>
+  </h1>
+  <div class="hero-stats">
+    <a class="hero-stat" href="pages/Product%20Work%20Case%20Study.html">
+      <div class="hero-stat-number">7</div>
+      <div class="hero-stat-text">years inside IBM product teams</div>
+    </a>
+    <a class="hero-stat" href="pages/Carbon%20Migration%20Case%20Study%20v3.html">
+      <div class="hero-stat-number">8</div>
+      <div class="hero-stat-text">Migration lead for eight acquired products.</div>
+    </a>
+    <a class="hero-stat" href="pages/Understanding%20People%20and%20Gaps%20Case%20Study%20v2.html">
+      <svg class="hero-stat-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><rect width="32" height="32" fill="none"/><path d="M20 15.1798L17.41 12.59L16 14L20 18L26 12L24.59 10.59L20 15.1798Z"/><path d="M10 18H8V20H10V18Z"/><path d="M12 9H7V11H11V13H8V16H10V15H12C12.5522 15 13 14.5522 13 14V10C13 9.4478 12.5522 9 12 9Z"/><path d="M17.7358 30L16 29L20 22H26C27.1071 22 28 21.1074 28 20V8C28 6.8926 27.1071 6 26 6H6C4.8929 6 4 6.8926 4 8V20C4 21.1074 4.8929 22 6 22H15V24H6C3.7907 24 2 22.21 2 20V8C2 5.7891 3.7907 4 6 4H26C28.2093 4 30 5.7891 30 8V20C30 22.21 28.2093 24 26 24H21.1646L17.7358 30Z"/></svg>
+      <div class="hero-stat-text">I ask what's broken and design what's next.</div>
+    </a>
+    <a class="hero-stat" href="pages/Carbon%20Contributions%20Case%20Study%20v2.html">
+      <svg class="hero-stat-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><rect width="32" height="32" fill="none"/><path d="M26 7H24V6C23.9994 5.46975 23.7885 4.9614 23.4135 4.58646C23.0386 4.21152 22.5302 4.00061 22 4H10C9.46975 4.00061 8.9614 4.21152 8.58646 4.58646C8.21152 4.9614 8.00061 5.46975 8 6V7H6C5.46975 7.00061 4.9614 7.21152 4.58646 7.58646C4.21152 7.9614 4.00061 8.46975 4 9V12C4.00119 13.0605 4.423 14.0772 5.17289 14.8271C5.92278 15.577 6.9395 15.9988 8 16H8.322C8.73868 17.5307 9.59206 18.907 10.7779 19.9608C11.9638 21.0146 13.4309 21.7003 15 21.9341V26H10V28H22V26H17V21.9311C18.5895 21.7346 20.0828 21.0635 21.2851 20.0055C22.4875 18.9475 23.343 17.5516 23.74 16H24C25.0605 15.9988 26.0772 15.577 26.8271 14.8271C27.577 14.0772 27.9988 13.0605 28 12V9C27.9994 8.46975 27.7885 7.9614 27.4135 7.58646C27.0386 7.21152 26.5302 7.00061 26 7ZM8 14C7.46975 13.9994 6.9614 13.7885 6.58646 13.4135C6.21152 13.0386 6.00061 12.5302 6 12V9H8V14ZM22 14C22 14.8035 21.8386 15.5989 21.5254 16.3389C21.2121 17.0788 20.7534 17.7484 20.1765 18.3077C19.5996 18.867 18.9162 19.3048 18.1669 19.595C17.4176 19.8852 16.6177 20.0219 15.8145 19.9971C14.222 19.8983 12.7289 19.1893 11.6459 18.0177C10.5629 16.846 9.97339 15.3018 10 13.7065V6H22V14ZM26 12C25.9994 12.5302 25.7885 13.0386 25.4135 13.4135C25.0386 13.7885 24.5302 13.9994 24 14V9H26V12Z"/></svg>
+      <div class="hero-stat-text">Multi-award winning Carbon contributor</div>
+    </a>
+    <a class="hero-stat" href="pages/AI%20Patent%20Case%20Study.html">
+      <svg class="hero-stat-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M30,18A6,6,0,1,0,20,22.46v7.54l4-1.8926,4,1.8926V22.46A5.98,5.98,0,0,0,30,18Zm-4,8.84-2-.9467L22,26.84V23.65a5.8877,5.8877,0,0,0,4,0ZM24,22a4,4,0,1,1,4-4A4.0045,4.0045,0,0,1,24,22Z"/><rect x="9" y="14" width="7" height="2"/><rect x="9" y="8" width="10" height="2"/><path d="M6,30a2.0021,2.0021,0,0,1-2-2V4A2.0021,2.0021,0,0,1,6,2H22a2.0021,2.0021,0,0,1,2,2V8H22V4H6V28H16v2Z"/></svg>
+      <div class="hero-stat-text">1 filed AI patent</div>
+    </a>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-grid">
+    <div class="body-col">
+      <p class="reveal">Seven years inside product teams taught me things a design system team rarely sees firsthand. Developers who quietly abandoned Carbon because the pattern they needed didn't exist. Teams misusing components — not through carelessness, but because the system gave them no guidance. Acquisitions arriving with their own design instincts, needing to be brought into alignment.</p>
+      <p class="reveal d1">In 2022, I worked on Carbon for IBM Products at 80% capacity — the only designer doing so at that level. I know Carbon from the outside, building products with it. I know it from the inside, contributing to it. Now I want to help shape what's next.</p>
+      <p class="reveal d1">My AI fluency predates the hype. A 2020 patent exploring AI-driven prioritisation of radiology scans. AI-native, headless experience design work today. The first designer in my organisation to ship production code created with AI tooling. I'm not chasing fluency; I'm building on years of practice.</p>
+      <p class="reveal d2">I've built with Carbon, contributed to it, and pushed against its limits. That's why I want to help define what's next.</p>
+    </div>
+    <div class="pull-quote reveal d2">
+      I know where a design system must flex — and where it must hold.
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <span class="section-label reveal">Work</span>
+  <div class="projects-grid">
+
+    <a class="project-card reveal d1" href="pages/Product%20Work%20Case%20Study.html">
+      <div class="project-card-top">
+        <!-- Dashboard icon -->
+        <svg class="project-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect fill="none" width="16" height="16"/><path d="M13 10.5H12V13H13V10.5Z"/><path d="M11 8H10V13H11V8Z"/><path d="M5.5 13C4.8372 12.9992 4.20177 12.7356 3.7331 12.2669C3.26442 11.7982 3.00078 11.1628 3 10.5H4C4 10.7967 4.08797 11.0867 4.2528 11.3334C4.41762 11.58 4.65189 11.7723 4.92597 11.8858C5.20006 11.9994 5.50166 12.0291 5.79264 11.9712C6.08361 11.9133 6.35088 11.7704 6.56066 11.5607C6.77044 11.3509 6.9133 11.0836 6.97118 10.7926C7.02906 10.5017 6.99935 10.2001 6.88582 9.92597C6.77229 9.65189 6.58003 9.41762 6.33336 9.2528C6.08668 9.08797 5.79667 9 5.5 9V8C6.16304 8 6.79893 8.26339 7.26777 8.73223C7.73661 9.20107 8 9.83696 8 10.5C8 11.163 7.73661 11.7989 7.26777 12.2678C6.79893 12.7366 6.16304 13 5.5 13Z"/><path d="M14 1H2C1.73486 1.00026 1.48066 1.10571 1.29319 1.29319C1.10571 1.48066 1.00026 1.73486 1 2V14C1.0003 14.2651 1.10576 14.5193 1.29323 14.7068C1.4807 14.8942 1.73488 14.9997 2 15H14C14.2651 14.9996 14.5193 14.8942 14.7067 14.7067C14.8942 14.5193 14.9996 14.2651 15 14V2C14.9997 1.73488 14.8942 1.4807 14.7068 1.29323C14.5193 1.10576 14.2651 1.0003 14 1ZM14 5.5H7V2H14V5.5ZM6 2V5.5H2V2H6ZM2 14V6.5H14.0003L14.001 14H2Z"/></svg>
+        <span class="project-arrow">↗</span>
+      </div>
+      <div class="project-card-bottom">
+        <p class="project-name">Seven years in product. This is what good actually looks like.</p>
+        <p class="project-desc">Seven years of craft and process — creating quality experiences fast, and what those years taught me about what good actually looks like.</p>
+      </div>
+    </a>
+
+    <a class="project-card reveal d2" href="pages/Carbon%20Migration%20Case%20Study%20v3.html">
+      <div class="project-card-top">
+        <!-- Carbon icon -->
+        <svg class="project-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect fill="none" width="16" height="16"/><path d="M6.75 15.4066C6.66365 15.4065 6.57879 15.3841 6.50365 15.3416L2.25365 12.9341C2.17668 12.8905 2.11264 12.8272 2.06808 12.7508C2.02352 12.6744 2.00003 12.5876 2 12.4991V7.4991C2.00002 7.41064 2.02351 7.32376 2.06807 7.24734C2.11263 7.17092 2.17667 7.10769 2.25365 7.0641L6.50365 4.6566C6.57881 4.61412 6.66367 4.5918 6.75 4.5918C6.83633 4.5918 6.92119 4.61412 6.99635 4.6566L11.2464 7.0641C11.3233 7.10769 11.3874 7.17092 11.4319 7.24734C11.4765 7.32376 11.5 7.41064 11.5 7.4991V12.4991C11.5 12.5876 11.4765 12.6744 11.4319 12.7509C11.3874 12.8273 11.3233 12.8905 11.2464 12.9341L6.99635 15.3416C6.92121 15.3841 6.83634 15.4065 6.75 15.4066ZM3 12.2076L6.75 14.3319L10.5 12.2076V7.7906L6.75 5.66635L3 7.7906V12.2076Z"/><path d="M14 8.4991H13V3.7906L9.25 1.66635L5.24635 3.9341L4.75365 3.0641L9.00365 0.6566C9.07881 0.614121 9.16367 0.591797 9.25 0.591797C9.33633 0.591797 9.42119 0.614121 9.49635 0.6566L13.7464 3.0641C13.8233 3.10769 13.8874 3.17092 13.9319 3.24734C13.9765 3.32376 14 3.41064 14 3.4991V8.4991Z"/></svg>
+        <span class="project-arrow">↗</span>
+      </div>
+      <div class="project-card-bottom">
+        <p class="project-name">Carbon adoption at scale — with teams who didn't choose it.</p>
+        <p class="project-desc">Eight products, nine months, one platform — strategy, judgment, and earning trust from teams who didn't choose the system.</p>
+      </div>
+    </a>
+
+    <a class="project-card reveal d3" href="pages/Understanding%20People%20and%20Gaps%20Case%20Study%20v2.html">
+      <div class="project-card-top">
+        <!-- Question-answering icon -->
+        <svg class="project-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><rect fill="none" width="32" height="32"/><path d="M20 15.1798L17.41 12.59L16 14L20 18L26 12L24.59 10.59L20 15.1798Z"/><path d="M10 18H8V20H10V18Z"/><path d="M12 9H7V11H11V13H8V16H10V15H12C12.5522 15 13 14.5522 13 14V10C13 9.4478 12.5522 9 12 9Z"/><path d="M17.7358 30L16 29L20 22H26C27.1071 22 28 21.1074 28 20V8C28 6.8926 27.1071 6 26 6H6C4.8929 6 4 6.8926 4 8V20C4 21.1074 4.8929 22 6 22H15V24H6C3.7907 24 2 22.21 2 20V8C2 5.7891 3.7907 4 6 4H26C28.2093 4 30 5.7891 30 8V20C30 22.21 28.2093 24 26 24H21.1646L17.7358 30Z"/></svg>
+        <span class="project-arrow">↗</span>
+      </div>
+      <div class="project-card-bottom">
+        <p class="project-name">I asked developers what was broken. Then I fixed it.</p>
+        <p class="project-desc">Listening to developers, finding the real friction, and fixing it.</p>
+      </div>
+    </a>
+
+    <a class="project-card reveal d4" href="pages/Carbon%20Contributions%20Case%20Study%20v2.html">
+      <div class="project-card-top">
+        <!-- Traffic flow incident icon -->
+        <svg class="project-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect fill="none" width="16" height="16"/><path d="M13 4.71L12.295 4L11.0025 5.2925L11 5.29L10.9975 5.2925L9.71 4.005L9 4.71L10.29 6L9 7.29L9.705 8L10.9975 6.7075L11 6.71L11.0025 6.7075L12.29 7.995L13 7.29L11.71 6L13 4.71Z"/><path d="M7 8.71L6.295 8L5.0025 9.2925L5 9.29L4.9975 9.2925L3.71 8.005L3 8.71L4.29 10L3 11.29L3.705 12L4.9975 10.7075L5 10.71L5.0025 10.7075L6.29 11.995L7 11.29L5.71 10L7 8.71Z"/><path d="M2 1H1V15H2V1Z"/><path d="M15 1H14V15H15V1Z"/><path d="M8.5 1H7.5V3H8.5V1Z"/><path d="M8.5 5H7.5V7H8.5V5Z"/><path d="M8.5 9H7.5V11H8.5V9Z"/><path d="M8.5 13H7.5V15H8.5V13Z"/></svg>
+        <span class="project-arrow">↗</span>
+      </div>
+      <div class="project-card-bottom">
+        <p class="project-name">I found the gaps in Carbon and filled them.</p>
+        <p class="project-desc">Components, patterns, and processes — a showcase of the work I've contributed to the system over the years.</p>
+      </div>
+    </a>
+
+    <a class="project-card reveal d5" href="pages/AI%20Patent%20Case%20Study.html">
+      <div class="project-card-top">
+        <!-- Policy icon -->
+        <svg class="project-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><rect fill="none" width="32" height="32"/><path d="M30 18C30.002 16.9987 29.7534 16.0127 29.2768 15.1321C28.8002 14.2514 28.1107 13.5041 27.2713 12.9581C26.4319 12.4122 25.4692 12.085 24.4709 12.0064C23.4726 11.9278 22.4706 12.1003 21.5561 12.5082C20.6415 12.916 19.8437 13.5463 19.2351 14.3415C18.6266 15.1368 18.2267 16.0716 18.072 17.061C17.9173 18.0503 18.0127 19.0626 18.3495 20.0057C18.6862 20.9487 19.2536 21.7924 20 22.46V30L24 28.1074L28 30V22.46C28.6287 21.8994 29.1318 21.2123 29.4765 20.4437C29.8212 19.6751 29.9996 18.8423 30 18ZM26 26.84L24 25.8933L22 26.84V23.65C23.2925 24.1168 24.7075 24.1168 26 23.65V26.84ZM24 22C23.2089 22 22.4355 21.7654 21.7777 21.3259C21.1199 20.8864 20.6072 20.2616 20.3045 19.5307C20.0017 18.7998 19.9225 17.9956 20.0769 17.2196C20.2312 16.4437 20.6122 15.731 21.1716 15.1716C21.731 14.6122 22.4437 14.2312 23.2196 14.0769C23.9956 13.9225 24.7998 14.0017 25.5307 14.3045C26.2616 14.6072 26.8864 15.1199 27.3259 15.7777C27.7654 16.4355 28 17.2089 28 18C27.9988 19.0605 27.577 20.0772 26.8271 20.8271C26.0772 21.577 25.0605 21.9988 24 22Z"/><path d="M16 14H9V16H16V14Z"/><path d="M19 8H9V10H19V8Z"/><path d="M6 30C5.46974 29.9994 4.96135 29.7886 4.5864 29.4136C4.21145 29.0386 4.00056 28.5303 4 28V4C4.00056 3.46974 4.21145 2.96135 4.5864 2.5864C4.96135 2.21145 5.46974 2.00056 6 2H22C22.5303 2.00056 23.0386 2.21145 23.4136 2.5864C23.7886 2.96135 23.9994 3.46974 24 4V8H22V4H6V28H16V30H6Z"/></svg>
+        <span class="project-arrow">↗</span>
+      </div>
+      <div class="project-card-bottom">
+        <p class="project-name">1 filed patent in AI — before AI was a conversation.</p>
+        <p class="project-desc">A filed patent: AI-driven triage that pre-reads hundreds of scans, surfaces the critical image in the worklist, and keeps the radiologist in control.</p>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<footer>
+  <span>Laura Marshall</span>
+  <span>Made with IBM Bob</span>
+</footer>
+
+<script>
+  const sections = document.querySelectorAll('.section');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  sections.forEach((section) => observer.observe(section));
+</script>
+
+</body>
+</html>
